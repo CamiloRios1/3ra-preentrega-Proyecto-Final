@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sección de Banner -->
+  <section class="banner">
+    <img src="https://placekitten.com/1200/315" alt="Bienvenido a la Tienda Online">
+    <h1>Bienvenido a la Tienda Online</h1>
+  </section>
+
+  <!-- Sección de Productos -->
+  
+    <h2 class="produc">Nuestros Productos</h2>
+    <div id="productos-section" ></div>
+    <!-- ... (productos) -->
+  />
+  
+<!-- Sección de carrito -->
+  <div id="carrito-section">
+    <h2>Resumen del Carrito</h2>
+    <!-- ... (carrito) -->
+  </div>
+
+  <!-- Sección de Checkout -->
+  <section class="checkout" id="checkout-section">
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" required>
+
+      <label for="celular">Celular:</label>
+      <input type="tel" id="celular" required>
+
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" required>
+
+      <label for="pais">País:</label>
+      <input type="text" id="pais" required>
+
+      <button type="button" onclick="realizarCompra()">Realizar Compra</button>
+    </form>
+  </section>
+
+  <!-- Sección de Texto de Confirmación -->
+  <section class="confirmacion" id="confirmacion-section">
+    <h2 id="compra-proceso">¡Compra en proceso!</h2>
+    <p id="confirmacion-texto"></p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
