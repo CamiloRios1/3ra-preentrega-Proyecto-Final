@@ -123,7 +123,7 @@ body {
 
 .producto img,
 .item-carrito img {
-  max-width: 100%; /* Ajustar la imagen al ancho de su contenedor */
+  max-width: 100%; 
   height: auto; /* Mantener la proporción original */
 }
 
@@ -165,8 +165,8 @@ button:hover {
 }
 
 .carrito-imagen {
-  max-width: 50px; /* Tamaño más pequeño para la imagen en el carrito */
-  max-height: 50px; /* Altura máxima para la imagen en el carrito */
+  max-width: 50px; 
+  max-height: 50px; 
   margin-right: 10px;
 }
 
