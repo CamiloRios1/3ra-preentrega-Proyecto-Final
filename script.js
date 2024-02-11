@@ -13,11 +13,10 @@ const productos = [
     // Puedes agregar más productos según tus necesidades
   ];
   
-  const carrito = [];
-  
-  // Función para renderizar los productos en la página
+const carrito = [];
 
-  function renderizarProductos() {
+// Función para renderizar los productos en la página
+function renderizarProductos() {
     const productosSection = document.getElementById('productos-section');
     productosSection.innerHTML = '';
   
@@ -27,22 +26,19 @@ const productos = [
     });
   
     productosSection.style.display = 'flex';
-  }
-  
-  // Función para agregar productos al carrito
+}
 
-  function agregarAlCarrito(productoId) {
+// Función para agregar productos al carrito
+function agregarAlCarrito(productoId) {
     const productoSeleccionado = productos.find(producto => producto.id === productoId);
     carrito.push(productoSeleccionado);
   
     // Actualizar la sección del carrito
-
     renderizarCarrito();
-  }
+}
   
-  // Función para renderizar el carrito en la página
-
-  function renderizarCarrito() {
+// Función para renderizar el carrito en la página
+function renderizarCarrito() {
     const carritoSection = document.getElementById('carrito-section');
     carritoSection.innerHTML = '<h2>Resumen del Carrito</h2>';
   
@@ -51,12 +47,17 @@ const productos = [
       carritoSection.appendChild(itemElement);
     });
   
-    carritoSection.style.display = 'flex';
-  }
+    // Mostrar el subtotal
+    const subtotalElement = document.createElement('p');
+    subtotalElement.classList.add('subtotal');
+    subtotalElement.textContent = `Subtotal: $${calcularSubtotal()}`;
+    carritoSection.appendChild(subtotalElement);
   
-  // Función para crear un elemento de producto
+    carritoSection.style.display = 'flex';
+}
 
-  function crearElementoProducto(producto) {
+// Función para crear un elemento de producto
+function crearElementoProducto(producto) {
     const productoElement = document.createElement('div');
     productoElement.classList.add('producto');
     productoElement.innerHTML = `
@@ -66,11 +67,10 @@ const productos = [
       <button onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
     `;
     return productoElement;
-  }
+}
   
-  // Función para crear un elemento de carrito
-
-  function crearElementoCarrito(item) {
+// Función para crear un elemento de carrito
+function crearElementoCarrito(item) {
     const itemElement = document.createElement('div');
     itemElement.classList.add('item-carrito');
     itemElement.innerHTML = `
@@ -83,40 +83,16 @@ const productos = [
       </div>
     `;
     return itemElement;
-  }
-  // Función para calcular el subtotal del carrito
+}
 
+// Función para calcular el subtotal del carrito
 function calcularSubtotal() {
     return carrito.reduce((total, item) => total + item.precio, 0).toFixed(2);
-  }
-  
-  // Función para renderizar el carrito en la página
+}
 
-  function renderizarCarrito() {
-    const carritoSection = document.getElementById('carrito-section');
-    carritoSection.innerHTML = '<h2>Resumen del Carrito</h2>';
-  
-    carrito.forEach(item => {
-      const itemElement = crearElementoCarrito(item);
-      carritoSection.appendChild(itemElement);
-    });
-  
-    // Mostrar el subtotal
-
-    const subtotalElement = document.createElement('p');
-    subtotalElement.classList.add('subtotal');
-    subtotalElement.textContent = `Subtotal: $${calcularSubtotal()}`;
-    carritoSection.appendChild(subtotalElement);
-  
-    carritoSection.style.display = 'flex';
-  }
-
-  // Función para manejar el evento de clic en el botón de realizar compra
-
+// Función para manejar el evento de clic en el botón de realizar compra
 function realizarCompra() {
-  
     // Cambiar el contenido del cuadro de confirmación
-
     const compraProceso = document.getElementById('compra-proceso');
     const confirmacionTexto = document.getElementById('confirmacion-texto');
   
@@ -125,8 +101,39 @@ function realizarCompra() {
   
     const confirmacionSection = document.getElementById('confirmacion-section');
     confirmacionSection.style.display = 'block';
-  }
-    
-  // Inicializar la página
-  renderizarProductos();
-  
+}
+
+// Función para manejar el envío del formulario
+function enviarFormulario() {
+    // Obtener los valores del formulario
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const celular = document.getElementById('celular').value;
+    const direccion = document.getElementById('direccion').value;
+    const pais = document.getElementById('pais').value;
+
+    // Crear un objeto con los datos del formulario
+    const pedido = { nombre, correo, celular, direccion, pais };
+
+    try {
+        // Convertir el objeto a formato JSON y almacenarlo en el Local Storage
+        localStorage.setItem('pedido', JSON.stringify(pedido));
+        
+        // Mostrar un mensaje de éxito
+        alert('Pedido enviado correctamente.');
+    } catch (error) {
+        // Mostrar un mensaje de error si falla al guardar en el Local Storage
+        console.error('Error al guardar en el Local Storage:', error);
+        alert('Ocurrió un error al guardar el pedido. Por favor, inténtalo nuevamente.');
+    }
+}
+
+// Configurar el evento de envío del formulario
+const formulario = document.getElementById('checkout-form');
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevenir el envío del formulario
+    enviarFormulario(); // Llamar a la función para enviar el formulario
+});
+
+// Inicializar la página
+renderizarProductos();
