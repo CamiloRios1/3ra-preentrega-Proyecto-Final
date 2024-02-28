@@ -19,6 +19,7 @@ async function obtenerProductos() {
 
 // Función para inicializar la página
 async function inicializarPagina() {
+  
   // Obtener los productos desde el archivo JSON
   productos = await obtenerProductos();
 
